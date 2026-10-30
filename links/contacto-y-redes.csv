@@ -1,0 +1,6 @@
+﻿tipo,etiqueta,dato,enlace,nota
+Contacto,WhatsApp,+54 9 3462 38-5720,https://wa.me/5493462385720,De la web actual thepuzzle.ai
+Contacto,Email,hello@thepuzzle.digital,mailto:hello@thepuzzle.digital,Del brochure general 2026 (el de Privacy usa hello@thepuzzle.ai)
+Contacto,Email demos Privacy,hello@thepuzzle.ai,mailto:hello@thepuzzle.ai,Del brochure Privacy AI Studio 2026
+Red social,Instagram,@thepuzzle.ai,https://www.instagram.com/thepuzzle.ai/,Handle del brochure
+Red social,LinkedIn,thepuzzle.ai,https://www.linkedin.com/company/thepuzzle-ai/,A CONFIRMAR: URL deducida; se cambia en build.py (CONFIG)

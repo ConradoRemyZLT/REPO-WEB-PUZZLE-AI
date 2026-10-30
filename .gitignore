@@ -1,0 +1,7 @@
+# Copia armada del sitio (la genera build.py / el workflow)
+/_site/
+__pycache__/
+desktop.ini
+Thumbs.db
+~$*
+.DS_Store

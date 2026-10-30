@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Puzzle AI · Inteligencia artificial confiable</title>
+<meta name="description" content="Puzzle AI es un ecosistema de inteligencia artificial nacido en Argentina en 2019: Privacy AI Studio, AI Agents, Energy AI y Data Hub. Privacidad, agentes e infraestructura de cómputo.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Puzzle AI · Inteligencia artificial confiable">
+<meta property="og:description" content="Un ecosistema de IA: privacidad, agentes, energía e infraestructura de cómputo. Desde Argentina al mundo.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="{{png:iconos/web/favicon-48.png}}">
+<link rel="apple-touch-icon" href="{{png:iconos/web/apple-touch-icon.png}}">
+<script>(function(H){H.className+=' js';try{var q=new URLSearchParams(location.search).get('lang'),s=localStorage.getItem('pz_lang');if(q==='en'||(!q&&s==='en'))H.classList.add('en')}catch(e){}var ok=false;try{ok=sessionStorage.getItem('pz_gate_ok')==='1'}catch(e){}if(!ok)H.classList.add('locked')})(document.documentElement)</script>
+<style>{{css}}</style>
+</head>
+<body>
+
+<!-- ================= LOADER ================= -->
+<div id="loader" aria-hidden="true">
+  <div class="ld-bg" style="background-image:url({{img:fondos/degradado-negro-violeta.png|1600}})"></div>
+  <div class="ld-in">
+    <div class="ld-mark"><img src="{{png:logos/marca/isotipo-p-blanco.png}}" alt=""><span class="ld-orbit"></span><span class="ld-orbit o2"></span></div>
+    <img class="ld-word" src="{{png:logos/marca/puzzle-ai-blanco.png|400}}" alt="">
+    <div class="ld-bar"><i></i></div>
+    <div class="ld-meta"><span class="l-es">Cargando inteligencia</span><span class="l-en">Loading intelligence</span><span class="ld-pc">0%</span></div>
+  </div>
+</div>
+<script>(function(){var p=document.querySelector('.ld-pc'),b=document.querySelector('.ld-bar i'),v=0,done=false;function set(x){v=x;p.textContent=Math.round(x)+'%';b.style.transform='scaleX('+(x/100)+')'}
+(function t(){if(done)return;set(v+(92-v)*.045);requestAnimationFrame(t)})();
+window.addEventListener('load',function(){done=true;var s=v,t0=performance.now();(function f(n){var k=Math.min(1,(n-t0)/380);set(s+(100-s)*k);if(k<1)requestAnimationFrame(f)})(t0)})})()</script>
+
+<!-- ================= ACCESO PRIVADO ================= -->
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="g-title">
+  <div class="g-bg" style="background-image:url({{img:fondos/degradado-verde-azul.png|1920}})"></div>
+  <img class="g-tex" src="{{png:fondos/textura-lineas-ola-negativo.png|1400}}" alt="">
+  <img class="g-tex t2" src="{{png:fondos/textura-lineas-anillo-negativo.png|1200}}" alt="">
+  <div class="g-lang lang" role="group" aria-label="Idioma / Language"><button data-lang="es" type="button">ES</button><button data-lang="en" type="button">EN</button></div>
+  <div class="g-wrap">
+    <img class="g-logo" src="{{png:logos/marca/puzzle-ai-agents-blanco.png|500}}" alt="Puzzle AI agents">
+    <form class="g-card" novalidate>
+      <span class="eyebrow"><span class="l-es">Acceso privado</span><span class="l-en">Private access</span></span>
+      <h1 id="g-title" class="g-title"><span class="l-es">Bienvenido a Puzzle AI</span><span class="l-en">Welcome to Puzzle AI</span></h1>
+      <label for="gu">Email</label>
+      <div class="g-field"><span class="g-ico">{{ico:user}}</span><input id="gu" type="email" autocomplete="username" autocapitalize="off" spellcheck="false" required placeholder="nombre@empresa.com"></div>
+      <label for="gp"><span class="l-es">Contraseña</span><span class="l-en">Password</span></label>
+      <div class="g-field"><span class="g-ico">{{ico:lock}}</span><input id="gp" type="password" autocomplete="current-password" required placeholder="••••••••"><button type="button" class="g-eye" aria-label="Mostrar contraseña">{{ico:eye}}</button></div>
+      <button type="submit" class="btn btn-solid g-sub"><span class="l-es">Ingresar</span><span class="l-en">Sign in</span>{{ico:arrow}}</button>
+      <p class="g-err" role="alert" aria-live="polite"></p>
+    </form>
+    <p class="g-foot"><span class="l-es">Si no tenés acceso, contactate con Puzzle AI.</span><span class="l-en">If you don't have access, please contact Puzzle AI.</span></p>
+  </div>
+</div>
+<script>{{gate}}</script>
+<div id="progress"></div>
+
+<!-- ================= HEADER ================= -->
+<header id="hdr">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Puzzle AI"><img src="{{png:logos/marca/puzzle-ai-blanco.png|360}}" alt="Puzzle AI"></a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#ecosistema"><span class="l-es">Ecosistema</span><span class="l-en">Ecosystem</span></a>
+      <a href="#nosotros"><span class="l-es">Nosotros</span><span class="l-en">About</span></a>
+      <a href="#privacy">Privacy AI Studio</a>
+      <a href="#agents">AI Agents</a>
+      <a href="#energy">Energy AI</a>
+      <a href="#datahub">Data Hub</a>
+      <a href="#impacto"><span class="l-es">Impacto</span><span class="l-en">Impact</span></a>
+      <a href="#contacto"><span class="l-es">Contacto</span><span class="l-en">Contact</span></a>
+    </nav>
+    <div class="hdr-actions">
+      <div class="lang" role="group" aria-label="Idioma / Language"><button data-lang="es" type="button">ES</button><button data-lang="en" type="button">EN</button></div>
+      <a class="btn btn-ghost" href="{{pdf:brochures/puzzle-brochure-2026.pdf}}" target="_blank" rel="noopener">{{ico:download}}<span>Brochure</span></a>
+      <button class="burger" type="button" aria-label="Menú"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav id="mnav" aria-label="Menú móvil">
+  <a href="#ecosistema" style="--i:0"><span class="l-es">Ecosistema</span><span class="l-en">Ecosystem</span></a>
+  <a href="#nosotros" style="--i:1"><span class="l-es">Nosotros</span><span class="l-en">About</span></a>
+  <a href="#privacy" style="--i:2">Privacy AI Studio</a>
+  <a href="#agents" style="--i:3">AI Agents</a>
+  <a href="#energy" style="--i:4">Energy AI</a>
+  <a href="#datahub" style="--i:5">Data Hub</a>
+  <a href="#impacto" style="--i:6"><span class="l-es">Impacto</span><span class="l-en">Impact</span></a>
+  <a href="#equipo" style="--i:7"><span class="l-es">Equipo</span><span class="l-en">Team</span></a>
+  <a href="#contacto" style="--i:8"><span class="l-es">Contacto</span><span class="l-en">Contact</span></a>
+  <div class="btns"><a class="btn btn-solid" href="{{pdf:brochures/puzzle-brochure-2026.pdf}}" target="_blank" rel="noopener">{{ico:download}}<span class="l-es">Descargar brochure</span><span class="l-en">Download brochure</span></a></div>
+</nav>
+
+<nav id="dotnav" aria-label="Índice"></nav>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section id="top" data-label-es="Inicio" data-label-en="Home">
+  <div class="bgimg" data-par="0.25" style="background-image:url({{img:fondos/degradado-negro-violeta.png|1920}})"></div>
+  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="wrap hero-in">
+    <span class="eyebrow" data-r><span class="l-es">Ecosistema de inteligencia artificial · desde 2019</span><span class="l-en">Artificial intelligence ecosystem · since 2019</span></span>
+    <h1 class="h1">
+      <span class="l-es" data-split>IA confiable para el mundo real.</span>
+      <span class="l-en" data-split>Trustworthy AI for the real world.</span>
+    </h1>
+    <p class="lead" data-r style="--d:3">
+      <span class="l-es">Del dato protegido a la infraestructura de cómputo: unidades de negocio y productos que llevan la inteligencia artificial a producción en sectores estratégicos, con la</span>
+      <span class="l-en">From protected data to compute infrastructure: business units and products that take artificial intelligence into production across strategic sectors, with</span>
+      <span class="rot"><b class="gtext" data-rot-es="privacidad|trazabilidad|soberanía|eficiencia" data-rot-en="privacy|traceability|sovereignty|efficiency">privacidad</b><i class="cur"></i></span>
+      <span class="l-es">como estándar.</span><span class="l-en">as the standard.</span>
+    </p>
+    <div class="btns" data-r style="--d:4">
+      <a class="btn btn-solid mag" href="#ecosistema"><span class="l-es">Explorar el ecosistema</span><span class="l-en">Explore the ecosystem</span>{{ico:arrow-down}}</a>
+      <a class="btn btn-ghost mag" href="{{pdf:brochures/puzzle-brochure-2026.pdf}}" target="_blank" rel="noopener">{{ico:download}}<span class="l-es">Brochure 2026</span><span class="l-en">2026 brochure</span></a>
+    </div>
+    <div class="hero-units" data-r style="--d:5">
+      <a href="#privacy" aria-label="Privacy AI Studio"><img src="{{png:logos/unidades/privacy-ai-studio-blanco.png|600}}" alt="Privacy AI Studio"></a><span class="sep"></span>
+      <a href="#agents" aria-label="AI Agents"><img src="{{png:logos/unidades/ai-agents-blanco.png|500}}" alt="AI Agents"></a><span class="sep"></span>
+      <a href="#energy" aria-label="Energy AI"><img src="{{png:logos/unidades/energy-ai-blanco.png|500}}" alt="Energy AI"></a><span class="sep"></span>
+      <a href="#datahub" aria-label="Data Hub"><img src="{{png:logos/unidades/data-hub-blanco.png|500}}" alt="Data Hub"></a>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"></div>
+  <div class="ticker" aria-hidden="true">
+    <div class="marq" style="--t:46s">
+      <span class="l-es">Privacidad</span><span class="l-es">Agentes de IA</span><span class="l-es">Energía</span><span class="l-es">Infraestructura de cómputo</span><span class="l-es">Datos</span><span class="l-es">Innovación argentina</span>
+      <span class="l-en">Privacy</span><span class="l-en">AI agents</span><span class="l-en">Energy</span><span class="l-en">Compute infrastructure</span><span class="l-en">Data</span><span class="l-en">Argentine innovation</span>
+      <span class="l-es">Privacidad</span><span class="l-es">Agentes de IA</span><span class="l-es">Energía</span><span class="l-es">Infraestructura de cómputo</span><span class="l-es">Datos</span><span class="l-es">Innovación argentina</span>
+      <span class="l-en">Privacy</span><span class="l-en">AI agents</span><span class="l-en">Energy</span><span class="l-en">Compute infrastructure</span><span class="l-en">Data</span><span class="l-en">Argentine innovation</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ECOSISTEMA ================= -->
+<section id="ecosistema" class="sec dark" data-label-es="Ecosistema" data-label-en="Ecosystem">
+  <div class="bg bg-grain"></div>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-r><span class="l-es">Arquitectura de marca</span><span class="l-en">Brand architecture</span></span>
+      <h2 class="h2"><span class="l-es" data-split>Una casa madre. Muchas piezas que encajan.</span><span class="l-en" data-split>One parent brand. Many pieces that fit.</span></h2>
+      <p class="lead" data-r style="--d:2"><span class="l-es">Puzzle AI es el proyecto madre de un ecosistema de unidades de negocio, productos e iniciativas. Cada pieza resuelve un problema distinto, y todas comparten el mismo ADN: inteligencia artificial confiable, con la privacidad como punto de partida.</span><span class="l-en">Puzzle AI is the parent of an ecosystem of business units, products and initiatives. Each piece solves a different problem, and they all share the same DNA: trustworthy artificial intelligence, with privacy as the starting point.</span></p>
+    </div>
+    <div class="eco">
+      <div class="orbit" data-r="scale" id="orbit">
+        <svg viewBox="0 0 600 600" aria-hidden="true">
+          <defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7EA78C"/><stop offset=".5" stop-color="#2c83a7"/><stop offset="1" stop-color="#5e71ba"/></linearGradient></defs>
+          <circle class="ring" cx="300" cy="300" r="185"/>
+          <circle class="ring dash" cx="300" cy="300" r="270"/>
+          <path class="link" d="M300 300 Q 300 200 300 115"/>
+          <path class="link" d="M300 300 Q 400 360 460 392"/>
+          <path class="link" d="M300 300 Q 200 360 140 392"/>
+          <circle class="pulse" r="3"><animateMotion dur="3.2s" repeatCount="indefinite" path="M300 300 Q 300 200 300 115"/></circle>
+          <circle class="pulse" r="3"><animateMotion dur="3.6s" repeatCount="indefinite" path="M300 300 Q 400 360 460 392"/></circle>
+          <circle class="pulse" r="3"><animateMotion dur="4s" repeatCount="indefinite" path="M300 300 Q 200 360 140 392"/></circle>
+          <g id="orb-rot"><circle cx="300" cy="30" r="4" fill="#7EA78C"/><circle cx="570" cy="300" r="3" fill="#5e71ba"/><circle cx="300" cy="570" r="4" fill="#2c83a7"/><circle cx="30" cy="300" r="3" fill="#fff" opacity=".6"/></g>
+        </svg>
+        <div class="o-core"><img src="{{png:logos/marca/puzzle-ai-blanco.png|400}}" alt="Puzzle AI"></div>
+        <a class="o-node" data-k="privacy" href="#privacy" style="left:50%;top:19.2%"><small><span class="l-es">Unidad N°1</span><span class="l-en">Unit 01</span></small><img src="{{png:logos/unidades/privacy-ai-studio-blanco.png|500}}" alt="Privacy AI Studio"></a>
+        <a class="o-node" data-k="energy" href="#energy" style="left:76.7%;top:65.3%"><small><span class="l-es">Unidad N°2</span><span class="l-en">Unit 02</span></small><img src="{{png:logos/unidades/energy-ai-blanco.png|400}}" alt="Energy AI"></a>
+        <a class="o-node" data-k="datahub" href="#datahub" style="left:23.3%;top:65.3%"><small><span class="l-es">Unidad N°3</span><span class="l-en">Unit 03</span></small><img src="{{png:logos/unidades/data-hub-blanco.png|400}}" alt="Data Hub"></a>
+        <a class="o-sat" data-k="agents" href="#agents" style="left:84%;top:16%">AI Agents</a>
+        <a class="o-sat" data-k="hubtech" href="#alianzas" style="left:13%;top:16%">HubTech IA</a>
+        <a class="o-sat" data-k="formacion" href="#alianzas" style="left:50%;top:96%"><span class="l-es">Formación</span><span class="l-en">Talent</span></a>
+      </div>
+      <div class="eco-list">
+        <div class="eco-group" data-r><span class="l-es">Unidades de negocio</span><span class="l-en">Business units</span></div>
+        <a class="eco-item glass spot" data-k="privacy" href="#privacy" data-r style="--d:1"><span class="num">N°1</span><div><h4>Privacy AI Studio</h4><p><span class="l-es">Plataforma on-premise para usar IA protegiendo datos confidenciales.</span><span class="l-en">On-premise platform to use AI while protecting confidential data.</span></p></div><span class="arr">{{ico:arrow}}</span></a>
+        <a class="eco-item glass spot" data-k="energy" href="#energy" data-r style="--d:2"><span class="num">N°2</span><div><h4>Energy AI</h4><p><span class="l-es">Agentes de IA para la industria energética.</span><span class="l-en">AI agents for the energy industry.</span></p></div><span class="arr">{{ico:arrow}}</span></a>
+        <a class="eco-item glass spot" data-k="datahub" href="#datahub" data-r style="--d:3"><span class="num">N°3</span><div><h4>Data Hub</h4><p><span class="l-es">Infraestructura de cómputo para IA: Patagonian AI Factories Hub.</span><span class="l-en">Compute infrastructure for AI: Patagonian AI Factories Hub.</span></p></div><span class="arr">{{ico:arrow}}</span></a>
+        <div class="eco-group" data-r><span class="l-es">Producto transversal</span><span class="l-en">Cross-cutting product</span></div>
+        <a class="eco-item glass spot" data-k="agents" href="#agents" data-r style="--d:4"><span class="num">AI</span><div><h4>AI Agents</h4><p><span class="l-es">Agentes y workflows a medida de cada organización.</span><span class="l-en">Agents and workflows tailored to each organization.</span></p></div><span class="arr">{{ico:arrow}}</span></a>
+        <div class="eco-group" data-r><span class="l-es">Iniciativas</span><span class="l-en">Initiatives</span></div>
+        <a class="eco-item glass spot" data-k="hubtech" href="#alianzas" data-r style="--d:5"><span class="num">HUB</span><div><h4>HubTech IA</h4><p><span class="l-es">Gobierno, empresas y academia por un polo de IA argentino.</span><span class="l-en">Government, companies and academia for an Argentine AI hub.</span></p></div><span class="arr">{{ico:arrow}}</span></a>
+        <a class="eco-item glass spot" data-k="formacion" href="#alianzas" data-r style="--d:6"><span class="num">EDU</span><div><h4><span class="l-es">Formación de talento</span><span class="l-en">Talent development</span></h4><p><span class="l-es">Programas propios y alianzas para formar talento en IA.</span><span class="l-en">Own programs and alliances to grow AI talent.</span></p></div><span class="arr">{{ico:arrow}}</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NOSOTROS ================= -->
+<section id="nosotros" class="sec light" data-label-es="Nosotros" data-label-en="About">
+  <img class="tex tex-a" data-par="-0.12" src="{{img:fondos/textura-lineas-ola.png|1400}}" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="about">
+      <div>
+        <span class="eyebrow" data-r><span class="l-es">Sobre nosotros</span><span class="l-en">About us</span></span>
+        <h2 class="h2"><span class="l-es" data-split>Una empresa AI First con una mirada integral.</span><span class="l-en" data-split>An AI-first company with a holistic view.</span></h2>
+      </div>
+      <div data-r style="--d:2">
+        <p><span class="l-es">Ayudamos a organizaciones a impulsar su transformación digital a través de soluciones de inteligencia artificial pensadas para cada negocio.</span><span class="l-en">We help organizations drive their digital transformation through artificial intelligence solutions designed for each business.</span></p>
+        <p><span class="l-es">Diseñamos y desarrollamos productos de IA, aportando eficiencia y escalabilidad a los procesos de forma concreta y eficiente.</span><span class="l-en">We design and build AI products that bring efficiency and scalability to processes in a concrete, effective way.</span></p>
+        <p><span class="l-es">Nuestro enfoque combina conocimiento técnico y visión estratégica, con un fuerte compromiso con la ética y la protección de datos, acompañando a las organizaciones en la adopción de IA alineada con sus objetivos.</span><span class="l-en">Our approach combines technical expertise and strategic vision, with a strong commitment to ethics and data protection, guiding organizations to adopt AI aligned with their goals.</span></p>
+      </div>
+    </div>
+
+    <div class="mv">
+      <article class="mv-card spot" data-tilt data-r="left">
+        <div class="bgimg" style="background-image:url({{img:fondos/degradado-verde-azul.png|1400}})"></div>
+        <span class="kw"><span class="l-es">Misión</span><span class="l-en">Mission</span></span>
+        <p><span class="l-es">Construimos inteligencia artificial confiable para el mundo real, transformando energía en capacidad de cómputo escalable y exportable. Integramos privacidad, infraestructura y eficiencia operativa para llevar IA a producción en sectores estratégicos.</span><span class="l-en">We build trustworthy artificial intelligence for the real world, turning energy into scalable, exportable compute capacity. We integrate privacy, infrastructure and operational efficiency to bring AI into production in strategic sectors.</span></p>
+      </article>
+      <article class="mv-card spot" data-tilt data-r="right">
+        <div class="bgimg" style="background-image:url({{img:fondos/degradado-negro-violeta.png|1400}})"></div>
+        <span class="kw"><span class="l-es">Visión</span><span class="l-en">Vision</span></span>
+        <p><span class="l-es">Convertirnos en referente global en la creación y operación de infraestructura de cómputo y plataformas tecnológicas confiables, con reglas claras de privacidad y control, llevando inteligencia artificial confiable desde Argentina al mundo.</span><span class="l-en">To become a global reference in building and operating compute infrastructure and trustworthy technology platforms, with clear privacy and control rules, taking trustworthy artificial intelligence from Argentina to the world.</span></p>
+      </article>
+    </div>
+
+    <div class="values">
+      <div data-r>
+        <span class="eyebrow"><span class="l-es">Nuestros valores</span><span class="l-en">Our values</span></span>
+        <h3 class="h2" style="font-size:clamp(28px,3.2vw,44px)"><span class="l-es">Nacimos en 2019 como una incubadora de talento IT.</span><span class="l-en">We were born in 2019 as an IT talent incubator.</span></h3>
+        <p class="lead"><span class="l-es">Desde el comienzo apostamos al vínculo público-privado, impulsando proyectos junto al Laboratorio de IA de la Facultad de Derecho de la UBA y al de la Universidad de Córdoba.</span><span class="l-en">From the start we bet on public-private partnership, driving projects with the AI Lab of the UBA School of Law and that of the University of Córdoba.</span></p>
+      </div>
+      <div class="vlist">
+        <div class="vrow" data-r style="--d:1;--c:#e9eef0"><span class="dot"></span><span><span class="l-es">La privacidad es nuestro ADN</span><span class="l-en">Privacy is our DNA</span></span></div>
+        <div class="vrow" data-r style="--d:2;--c:#8fb4c4"><span class="dot"></span><span><span class="l-es">Brindamos soluciones reales</span><span class="l-en">We deliver real solutions</span></span></div>
+        <div class="vrow" data-r style="--d:3;--c:#2c83a7"><span class="dot"></span><span><span class="l-es">Revolucionamos la industria con IA</span><span class="l-en">We transform industry with AI</span></span></div>
+        <div class="vrow" data-r style="--d:4;--c:#324158"><span class="dot"></span><span><span class="l-es">Impulsamos innovación argentina</span><span class="l-en">We drive Argentine innovation</span></span></div>
+      </div>
+    </div>
+
+    <div class="tl" id="tl">
+      <div class="tl-track"><i></i></div>
+      <div class="tl-items">
+        <div class="tl-it"><b>2019</b><span class="l-es">Nace Puzzle como incubadora de talento IT y empresa de software.</span><span class="l-en">Puzzle is born as an IT talent incubator and software company.</span></div>
+        <div class="tl-it"><b>2024</b><span class="l-es">Impulsa HubTech IA y gana el 1er lugar en #LatamDigital.</span><span class="l-en">Launches HubTech IA and wins 1st place at #LatamDigital.</span></div>
+        <div class="tl-it"><b>2025</b><span class="l-es">Premio de Privacidad y Protección de Datos de la AEPD.</span><span class="l-en">Privacy and Data Protection Award from Spain's AEPD.</span></div>
+        <div class="tl-it"><b>2026</b><span class="l-es">1er lugar en Ciberseguridad · #LatamDigital.</span><span class="l-en">1st place in Cybersecurity · #LatamDigital.</span></div>
+        <div class="tl-it"><b><span class="l-es">Hoy</span><span class="l-en">Today</span></b><span class="l-es">Un ecosistema: privacidad, agentes, energía e infraestructura.</span><span class="l-en">An ecosystem: privacy, agents, energy and infrastructure.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= UNIDAD 1 · PRIVACY AI STUDIO ================= -->
+<section id="privacy" class="unit" aria-label="Privacy AI Studio" data-label-es="Privacy AI Studio" data-label-en="Privacy AI Studio">
+  <div class="bg"><video data-src="{{video:videos/privacy-fondo-loop.mp4}}" muted loop playsinline preload="none" poster="{{img:fondos/privacy-fondo-web.png|1600}}"></video></div>
+  <div class="unit-num" aria-hidden="true" data-par="0.18">01</div>
+  <div class="wrap">
+    <div class="u-top">
+      <span class="eyebrow" data-r><span class="l-es">Unidad de negocio N°1 · Privacidad</span><span class="l-en">Business unit 01 · Privacy</span></span>
+      <span class="tag tag-live" data-r><span class="l-es">Disponible</span><span class="l-en">Available</span></span>
+      <div class="u-logo" data-r style="--d:1"><img src="{{png:logos/unidades/privacy-ai-studio-blanco.png|900}}" alt="Privacy AI Studio"></div>
+      <h2 class="sr-only">Privacy AI Studio</h2>
+      <div class="u-place" data-r style="--d:2">{{ico:pin}}<span class="l-es">On-premise · Trazable · Auditable · Argentina y LATAM</span><span class="l-en">On-premise · Traceable · Auditable · Argentina &amp; LATAM</span></div>
+    </div>
+    <div class="u-grid">
+      <div>
+        <h3 class="h2" style="font-size:clamp(28px,3.4vw,48px)"><span class="l-es" data-split>Tu equipo ya usa IA. ¿Sabés con qué datos?</span><span class="l-en" data-split>Your team already uses AI. Do you know with what data?</span></h3>
+        <p class="lead" data-r style="--d:2"><span class="l-es">La plataforma más completa para proteger datos confidenciales: anonimizá documentos, transcribí audios y videos y conectate con IA generativa sin que la información salga de tu infraestructura. Diseñada por IALAB de la Facultad de Derecho UBA y desarrollada por Puzzle AI.</span><span class="l-en">The most complete platform to protect confidential data: anonymize documents, transcribe audio and video and connect to generative AI without information leaving your infrastructure. Designed by IALAB at the UBA School of Law and built by Puzzle AI.</span></p>
+        <div class="chips" data-r style="--d:3">
+          <span class="chip"><span class="l-es">Poder Judicial</span><span class="l-en">Judiciary</span></span><span class="chip"><span class="l-es">Organismos públicos</span><span class="l-en">Public agencies</span></span><span class="chip"><span class="l-es">RRHH</span><span class="l-en">HR</span></span><span class="chip"><span class="l-es">Ley 25.326</span><span class="l-en">Law 25,326</span></span><span class="chip">GPT · Claude · Gemini · Mistral</span><span class="chip"><span class="l-es">Modelos locales</span><span class="l-en">Local models</span></span>
+        </div>
+        <div class="btns" data-r style="--d:4">
+          <a class="btn btn-solid mag" href="https://privacyaistudio.com" target="_blank" rel="noopener">{{ico:globe}}privacyaistudio.com</a>
+          <a class="btn btn-ghost mag" href="{{pdf:brochures/privacy-ai-studio-brochure-2026.pdf}}" target="_blank" rel="noopener">{{ico:download}}<span class="l-es">Brochure Privacy</span><span class="l-en">Privacy brochure</span></a>
+          <a class="btn btn-ghost mag" href="mailto:hello@thepuzzle.ai?subject=Demo%20Privacy%20AI%20Studio">{{ico:play}}<span class="l-es">Solicitar demo</span><span class="l-en">Request a demo</span></a>
+        </div>
+      </div>
+      <div class="kpis">
+        <div class="kpi glass" data-r style="--d:1"><b data-count="5" data-suf="x">0</b><span><span class="l-es">más rápido que la transcripción manual</span><span class="l-en">faster than manual transcription</span></span></div>
+        <div class="kpi glass" data-r style="--d:2"><b data-count="80" data-suf="%">0</b><span><span class="l-es">menos tiempo en anonimización*</span><span class="l-en">less time spent anonymizing*</span></span></div>
+        <div class="kpi glass" data-r style="--d:3"><b data-count="100" data-suf="%">0</b><span><span class="l-es">de interacciones con IA registradas</span><span class="l-en">of AI interactions logged</span></span></div>
+        <p style="grid-column:1/-1;margin:4px 0 0;font-size:12px;opacity:.55"><span class="l-es">* Basado en pruebas piloto internas.</span><span class="l-en">* Based on internal pilot tests.</span></p>
+      </div>
+    </div>
+
+    <div class="mods">
+      <article class="mod glass spot" data-tilt data-r style="--d:1"><div class="ico">{{ico:shield}}</div><span class="n"><span class="l-es">MÓDULO 01</span><span class="l-en">MODULE 01</span></span><h4><span class="l-es">Anonimización</span><span class="l-en">Anonymization</span></h4><p><span class="l-es">Detecta y protege datos personales con IA no generativa y patrones configurables, con revisión humana obligatoria antes de exportar.</span><span class="l-en">Detects and protects personal data using non-generative AI and configurable patterns, with mandatory human review before export.</span></p><ul><li>PDF</li><li>Word</li><li>ODT</li><li>JPG · PNG</li></ul></article>
+      <article class="mod glass spot" data-tilt data-r style="--d:2"><div class="ico">{{ico:mic}}</div><span class="n"><span class="l-es">MÓDULO 02</span><span class="l-en">MODULE 02</span></span><h4><span class="l-es">Transcripción</span><span class="l-en">Transcription</span></h4><p><span class="l-es">100% local: el audio nunca sale de tu infraestructura. Diarización automática, mapa de calor de confianza y exportación con timecode.</span><span class="l-en">100% local: audio never leaves your infrastructure. Automatic diarization, confidence heat map and timecoded export.</span></p><ul><li>MP3</li><li>MP4</li><li>WAV</li><li>M4A</li><li>FLAC</li></ul></article>
+      <article class="mod glass spot" data-tilt data-r style="--d:3"><div class="ico">{{ico:chat}}</div><span class="n"><span class="l-es">MÓDULO 03</span><span class="l-en">MODULE 03</span></span><h4><span class="l-es">Chat IA controlado</span><span class="l-en">Controlled AI chat</span></h4><p><span class="l-es">IA generativa dentro de un entorno controlado: asistente sobre documentos, prompts-clic y registro de cada interacción para auditoría.</span><span class="l-en">Generative AI inside a controlled environment: document assistant, one-click prompts and every interaction logged for audit.</span></p><ul><li><span class="l-es">Cualquier modelo</span><span class="l-en">Any model</span></li><li><span class="l-es">Pago por uso</span><span class="l-en">Pay per use</span></li></ul></article>
+    </div>
+
+    <div class="credits">
+      <div><span class="kw"><span class="l-es">Desarrolla</span><span class="l-en">Developed by</span></span><img src="{{png:logos/marca/puzzle-ai-blanco.png|360}}" alt="Puzzle AI"></div>
+      <div class="acomp"><span class="kw"><span class="l-es">Diseño y respaldo académico</span><span class="l-en">Design &amp; academic backing</span></span>
+        <div class="marq-wrap"><div class="marq" style="--t:22s"><img src="{{png:logos/aliados/blanco/uba-derecho-ialab.png|500}}" alt="UBA Derecho · IALAB"><img src="{{png:logos/aliados/blanco/ai-academy.png|400}}" alt="AI Academy"><img src="{{png:logos/aliados/blanco/cognitive.png|400}}" alt="Cognitive"><img src="{{png:logos/aliados/blanco/uba-derecho-ialab.png|500}}" alt="" aria-hidden="true"><img src="{{png:logos/aliados/blanco/ai-academy.png|400}}" alt="" aria-hidden="true"><img src="{{png:logos/aliados/blanco/cognitive.png|400}}" alt="" aria-hidden="true"></div></div>
+      </div>
+      <div class="btns" style="margin-top:0">
+        <a class="btn btn-ghost" style="height:40px;font-size:13px" href="{{pdf:brochures/privacy-ai-studio-one-pager-poder-judicial.pdf}}" target="_blank" rel="noopener">{{ico:doc}}<span class="l-es">One-pager Poder Judicial</span><span class="l-en">Judiciary one-pager</span></a>
+        <a class="btn btn-ghost" style="height:40px;font-size:13px" href="{{pdf:brochures/privacy-ai-studio-one-pager-estado.pdf}}" target="_blank" rel="noopener">{{ico:doc}}<span class="l-es">One-pager Estado</span><span class="l-en">Government one-pager</span></a>
+        <a class="btn btn-ghost" style="height:40px;font-size:13px" href="{{pdf:brochures/privacy-ai-studio-one-pager-rrhh.pdf}}" target="_blank" rel="noopener">{{ico:doc}}<span class="l-es">One-pager RRHH</span><span class="l-en">HR one-pager</span></a>
+      </div>
+    </div>
+
+    <div class="gal" data-r="scale" data-gal>
+      <div class="gtrack">{{gallery:fotos/privacy-ai-studio}}</div>
+      <button class="gprev" type="button" aria-label="Anterior">{{ico:chev-l}}</button>
+      <button class="gnext" type="button" aria-label="Siguiente">{{ico:chev-r}}</button>
+      <div class="gdots"></div><div class="gcount"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCTO · AI AGENTS ================= -->
+<section id="agents" class="unit light" aria-label="AI Agents" data-label-es="AI Agents" data-label-en="AI Agents">
+  <div class="bg"><img src="{{img:fondos/ai-agents-degradado.jpg|1920}}" alt=""></div>
+  <img class="tex" data-par="-0.1" src="{{img:fondos/textura-lineas-anillo.png|1400}}" alt="" aria-hidden="true">
+  <div class="unit-num" aria-hidden="true" data-par="0.18">AI</div>
+  <div class="wrap">
+    <div class="u-top">
+      <span class="eyebrow" data-r><span class="l-es">Producto transversal · Agentes</span><span class="l-en">Cross-cutting product · Agents</span></span>
+      <span class="tag tag-live" data-r><span class="l-es">Disponible</span><span class="l-en">Available</span></span>
+      <div class="u-logo" data-r style="--d:1"><img src="{{png:logos/unidades/ai-agents-navy.png|900}}" alt="AI Agents by Puzzle AI"></div>
+      <h2 class="sr-only">AI Agents</h2>
+      <div class="u-place" data-r style="--d:2">{{ico:pin}}<span class="l-es">Web · WhatsApp · Teams · Slack · CRM / BI</span><span class="l-en">Web · WhatsApp · Teams · Slack · CRM / BI</span></div>
+    </div>
+    <div class="u-grid">
+      <div>
+        <h3 class="h2" style="font-size:clamp(28px,3.4vw,48px)"><span class="l-es" data-split>Agentes 100% adaptables a tu operación.</span><span class="l-en" data-split>Agents fully adapted to your operation.</span></h3>
+        <p class="lead" data-r style="--d:2"><span class="l-es">AI Agents incorpora inteligencia artificial en la operación diaria con un enfoque práctico, seguro y orientado a resultados. Cada implementación se entrena con el lenguaje, la documentación, los criterios y los objetivos de la organización: automatiza tareas críticas, transforma información dispersa en acciones concretas y permite escalar procesos con trazabilidad.</span><span class="l-en">AI Agents brings artificial intelligence into day-to-day operations with a practical, secure, results-driven approach. Each implementation is trained on the organization's language, documents, criteria and goals: it automates critical tasks, turns scattered information into concrete actions and scales processes with traceability.</span></p>
+        <div class="btns" data-r style="--d:3">
+          <a class="btn btn-solid mag" href="https://www.thepuzzle.ai/agents" target="_blank" rel="noopener">{{ico:globe}}thepuzzle.ai/agents</a>
+          <a class="btn btn-ghost mag" href="#contacto"><span class="l-es">Hablemos de tu caso</span><span class="l-en">Let's talk about your case</span>{{ico:arrow}}</a>
+        </div>
+      </div>
+      <div class="uses">
+        <div class="use glass spot" data-r style="--d:1"><span class="ico">{{ico:target}}</span><div><h4><span class="l-es">Captación de leads</span><span class="l-en">Lead generation</span></h4><p><span class="l-es">Prospección inteligente, scoring predictivo y exportación a CRM / BI.</span><span class="l-en">Smart prospecting, predictive scoring and export to CRM / BI.</span></p></div></div>
+        <div class="use glass spot" data-r style="--d:2"><span class="ico">{{ico:chat}}</span><div><h4><span class="l-es">Atención y soporte</span><span class="l-en">Customer service</span></h4><p><span class="l-es">Agentes con tono institucional y derivación a humanos.</span><span class="l-en">Agents with your institutional tone and human hand-off.</span></p></div></div>
+        <div class="use glass spot" data-r style="--d:3"><span class="ico">{{ico:doc}}</span><div><h4><span class="l-es">Automatización documental</span><span class="l-en">Document automation</span></h4><p><span class="l-es">OCR + NLP para clasificar, extraer y validar grandes volúmenes.</span><span class="l-en">OCR + NLP to classify, extract and validate large volumes.</span></p></div></div>
+        <div class="use glass spot" data-r style="--d:4"><span class="ico">{{ico:bolt}}</span><div><h4><span class="l-es">Agentes por industria</span><span class="l-en">Industry agents</span></h4><p><span class="l-es">Energía, petróleo, gas y agua: mantenimiento predictivo e informes.</span><span class="l-en">Energy, oil, gas and water: predictive maintenance and reporting.</span></p></div></div>
+      </div>
+    </div>
+    <div class="steps" id="steps">
+      <div class="step"><span class="bul">01</span><h4>Discovery</h4><p><span class="l-es">Especialistas detectan oportunidades en tus procesos.</span><span class="l-en">Specialists spot opportunities in your processes.</span></p></div>
+      <div class="step"><span class="bul">02</span><h4><span class="l-es">Prototipado</span><span class="l-en">Prototyping</span></h4><p><span class="l-es">Diseñamos y validamos la solución rápido, sin desarrollos largos.</span><span class="l-en">We design and validate the solution fast, without long builds.</span></p></div>
+      <div class="step"><span class="bul">03</span><h4><span class="l-es">Implementación</span><span class="l-en">Implementation</span></h4><p><span class="l-es">Integración gradual y escalable con tus sistemas.</span><span class="l-en">Gradual, scalable integration with your systems.</span></p></div>
+      <div class="step"><span class="bul">04</span><h4><span class="l-es">Gobernanza</span><span class="l-en">Governance</span></h4><p><span class="l-es">Seguridad, privacidad y mejora continua.</span><span class="l-en">Security, privacy and continuous improvement.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= UNIDAD 2 · ENERGY AI ================= -->
+<section id="energy" class="unit" aria-label="Energy AI" data-label-es="Energy AI" data-label-en="Energy AI">
+  <div class="bg bg-grain"><img class="pimg" data-par="0.12" src="{{img:fondos/degradado-verde-azul.png|1920}}" alt=""></div>
+  <div class="unit-num" aria-hidden="true" data-par="0.18">02</div>
+  <div class="wrap">
+    <div class="u-top">
+      <span class="eyebrow" data-r><span class="l-es">Unidad de negocio N°2 · Energía</span><span class="l-en">Business unit 02 · Energy</span></span>
+      <span class="tag tag-dev" data-r><span class="l-es">Vertical activa</span><span class="l-en">Active vertical</span></span>
+      <div class="u-logo" data-r style="--d:1"><img src="{{png:logos/unidades/energy-ai-blanco.png|700}}" alt="Energy AI"></div>
+      <h2 class="sr-only">Energy AI</h2>
+      <div class="u-place" data-r style="--d:2">{{ico:pin}}<span class="l-es">Industria energética · Petróleo, gas y agua</span><span class="l-en">Energy industry · Oil, gas and water</span></div>
+    </div>
+    <div class="u-grid">
+      <div>
+        <h3 class="h2" style="font-size:clamp(28px,3.4vw,48px)"><span class="l-es" data-split>IA aplicada a la industria que mueve al país.</span><span class="l-en" data-split>AI applied to the industry that powers the country.</span></h3>
+        <p class="lead" data-r style="--d:2"><span class="l-es">Agentes de IA especializados para optimizar procesos, reducir riesgos y mejorar decisiones en sectores complejos como energía, petróleo, gas y agua. Entrenados con datos operativos y normativa del sector, convierten información técnica dispersa en informes, alertas y recomendaciones accionables.</span><span class="l-en">Specialized AI agents that optimize processes, reduce risk and improve decisions in complex sectors such as energy, oil, gas and water. Trained on operational data and industry regulation, they turn scattered technical information into actionable reports, alerts and recommendations.</span></p>
+        <div class="chips" data-r style="--d:3"><span class="chip">Oil &amp; Gas</span><span class="chip"><span class="l-es">Agua</span><span class="l-en">Water</span></span><span class="chip"><span class="l-es">Generación</span><span class="l-en">Power generation</span></span><span class="chip"><span class="l-es">Vaca Muerta</span><span class="l-en">Vaca Muerta</span></span><span class="chip"><span class="l-es">Datos operativos</span><span class="l-en">Operational data</span></span></div>
+        <div class="btns" data-r style="--d:4"><a class="btn btn-solid mag" href="#contacto"><span class="l-es">Consultar por Energy AI</span><span class="l-en">Ask about Energy AI</span>{{ico:arrow}}</a></div>
+      </div>
+      <div class="uses">
+        <div class="use glass spot" data-r style="--d:1"><span class="ico">{{ico:gear}}</span><div><h4><span class="l-es">Mantenimiento predictivo</span><span class="l-en">Predictive maintenance</span></h4><p><span class="l-es">Anticipar fallas a partir de datos de operación.</span><span class="l-en">Anticipate failures from operating data.</span></p></div></div>
+        <div class="use glass spot" data-r style="--d:2"><span class="ico">{{ico:chart}}</span><div><h4><span class="l-es">Análisis operativo</span><span class="l-en">Operational analytics</span></h4><p><span class="l-es">Lectura continua de datos de campo y planta.</span><span class="l-en">Continuous reading of field and plant data.</span></p></div></div>
+        <div class="use glass spot" data-r style="--d:3"><span class="ico">{{ico:doc}}</span><div><h4><span class="l-es">Informes y protocolos</span><span class="l-en">Reports &amp; protocols</span></h4><p><span class="l-es">Generación bajo normativa vigente del sector.</span><span class="l-en">Generated under current industry regulation.</span></p></div></div>
+        <div class="use glass spot" data-r style="--d:4"><span class="ico">{{ico:target}}</span><div><h4><span class="l-es">Viabilidad de proyectos</span><span class="l-en">Project feasibility</span></h4><p><span class="l-es">Evaluación asistida para decidir mejor y más rápido.</span><span class="l-en">Assisted evaluation to decide better and faster.</span></p></div></div>
+      </div>
+    </div>
+    <div class="credits">
+      <div><span class="kw"><span class="l-es">Desarrolla</span><span class="l-en">Developed by</span></span><img src="{{png:logos/marca/puzzle-ai-blanco.png|360}}" alt="Puzzle AI"></div>
+      <div class="acomp"><span class="kw"><span class="l-es">Motor</span><span class="l-en">Powered by</span></span><img src="{{png:logos/unidades/ai-agents-blanco.png|400}}" alt="AI Agents"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= UNIDAD 3 · DATA HUB ================= -->
+<section id="datahub" class="unit" aria-label="Data Hub" data-label-es="Data Hub" data-label-en="Data Hub">
+  <div class="bg bg-grain"><img class="pimg" data-par="0.12" src="{{img:fondos/degradado-negro-violeta.png|1920}}" alt=""></div>
+  <img class="wmark" src="{{png:logos/marca/isotipo-p-blanco.png}}" alt="" aria-hidden="true">
+  <canvas class="dots" id="dots" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.8"></canvas>
+  <div class="unit-num" aria-hidden="true" data-par="0.18">03</div>
+  <div class="wrap">
+    <div class="u-top">
+      <span class="eyebrow" data-r><span class="l-es">Unidad de negocio N°3 · Infraestructura</span><span class="l-en">Business unit 03 · Infrastructure</span></span>
+      <span class="tag tag-opp" data-r><span class="l-es">Oportunidad de inversión</span><span class="l-en">Investment opportunity</span></span>
+      <div class="u-logo" data-r style="--d:1"><img src="{{png:logos/unidades/data-hub-blanco.png|700}}" alt="Data Hub"></div>
+      <h2 class="sr-only">Data Hub · Patagonian AI Factories Hub</h2>
+      <div class="u-place" data-r style="--d:2">{{ico:pin}}<span>Arroyito · Neuquén, Argentina</span></div>
+    </div>
+    <div class="u-grid">
+      <div>
+        <span class="kw" style="color:var(--sage)" data-r>Patagonian AI Factories Hub</span>
+        <h3 class="h2" style="font-size:clamp(28px,3.4vw,48px)"><span class="l-es" data-split>Transformar energía en capacidad de cómputo.</span><span class="l-en" data-split>Turning energy into compute capacity.</span></h3>
+        <p class="lead" data-r style="--d:2"><span class="l-es">Una oportunidad “first-mover” en la infraestructura más crítica para el despliegue de la IA generativa. Ubicado en Arroyito, Neuquén, el proyecto aprovecha el arbitraje energético de Vaca Muerta para ofrecer una plataforma industrial de AI Factories diseñada para computación de alta densidad, que reduce el riesgo de desarrollo y asegura costos operativos disruptivos.</span><span class="l-en">A first-mover opportunity in the most critical infrastructure for deploying generative AI. Located in Arroyito, Neuquén, the project leverages Vaca Muerta's energy arbitrage to offer an industrial AI Factories platform designed for high-density computing, reducing development risk and securing disruptive operating costs.</span></p>
+        <div class="btns" data-r style="--d:3"><a class="btn btn-solid mag" href="mailto:hello@thepuzzle.digital?subject=Patagonian%20AI%20Factories%20Hub"><span class="l-es">Información para inversores</span><span class="l-en">Investor information</span>{{ico:arrow}}</a></div>
+      </div>
+      <div>
+        <div class="kpis" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="kpi glass" data-r style="--d:1"><b data-count="250" data-suf=" MW">0</b><span><span class="l-es">capacidad Fase 1</span><span class="l-en">Phase 1 capacity</span></span></div>
+          <div class="kpi glass" data-r style="--d:2"><b>AI</b><span><span class="l-es">Factories de alta densidad</span><span class="l-en">High-density factories</span></span></div>
+        </div>
+        <blockquote class="quote glass" data-r style="--d:3;margin-top:12px">
+          <span class="l-es">El mercado global enfrenta una triple restricción estructural.</span><span class="l-en">The global market faces a triple structural constraint.</span>
+          <span class="constraint"><span><span class="l-es">Energía</span><span class="l-en">Energy</span></span><i>+</i><span><span class="l-es">Permisos</span><span class="l-en">Permits</span></span><i>+</i><span><span class="l-es">Soberanía</span><span class="l-en">Sovereignty</span></span></span>
+          <small><span class="l-es">La ventana de oportunidad</span><span class="l-en">The window of opportunity</span></small>
+        </blockquote>
+      </div>
+    </div>
+    <div class="credits">
+      <div><span class="kw"><span class="l-es">Desarrolla</span><span class="l-en">Developed by</span></span><img src="{{png:logos/marca/puzzle-ai-blanco.png|360}}" alt="Puzzle AI"></div>
+      <p style="margin:0;flex:1;min-width:240px;font-size:14px;opacity:.65"><span class="l-es">Los centros tradicionales están saturados, con costos crecientes y plazos de desarrollo de 3 a 7 años. Arroyito permite aprovechar esta ventana antes del cierre del arbitraje energético.</span><span class="l-en">Traditional hubs are saturated, with rising costs and 3–7 year development timelines. Arroyito lets investors seize this window before the energy arbitrage closes.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IMPACTO ================= -->
+<section id="impacto" class="sec dark" data-label-es="Impacto" data-label-en="Impact">
+  <div class="bg"><img src="{{img:fondos/degradado-negro-violeta.png|1920}}" alt=""></div>
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="eyebrow" data-r><span class="l-es">Menciones</span><span class="l-en">Recognition</span></span>
+      <h2 class="h2"><span class="l-es" data-split>Reconocidos en Iberoamérica.</span><span class="l-en" data-split>Recognized across Ibero-America.</span></h2>
+    </div>
+    <div class="awards">
+      <article class="award glass spot" data-tilt data-r style="--d:1"><div class="lau"><img src="{{png:logos/premios/laurel.png|500}}" alt=""><img class="ins" src="{{png:logos/premios/latamdigital-2024.png|400}}" alt="#LatamDigital 2024"></div><span class="yr">2024</span><h4><span class="l-es">1er lugar · Mejor Proyecto de Experiencia del Cliente Potenciada</span><span class="l-en">1st place · Best Enhanced Customer Experience Project</span></h4><p><span class="l-es">11° Premios #LatamDigital · Interlat</span><span class="l-en">11th #LatamDigital Awards · Interlat</span></p></article>
+      <article class="award glass spot" data-tilt data-r style="--d:2"><div class="lau"><img src="{{png:logos/premios/aepd-2025.png|600}}" alt="AEPD 2025"></div><span class="yr">2025</span><h4><span class="l-es">Premio de Privacidad y Protección de Datos en Iberoamérica</span><span class="l-en">Ibero-American Privacy and Data Protection Award</span></h4><p><span class="l-es">Agencia Española de Protección de Datos (AEPD)</span><span class="l-en">Spanish Data Protection Agency (AEPD)</span></p></article>
+      <article class="award glass spot" data-tilt data-r style="--d:3"><div class="lau"><img src="{{png:logos/premios/latamdigital-2026.png|600}}" alt="#LatamDigital 2026"></div><span class="yr">2026</span><h4><span class="l-es">1er lugar en Ciberseguridad · CS4: Protección de datos con IA</span><span class="l-en">1st place in Cybersecurity · CS4: AI data protection</span></h4><p><span class="l-es">#LatamDigital · Interlat</span><span class="l-en">#LatamDigital · Interlat</span></p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ALIANZAS ================= -->
+<section id="alianzas" class="sec light" data-label-es="Alianzas" data-label-en="Alliances">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-r><span class="l-es">Ecosistema de alianzas</span><span class="l-en">Alliance ecosystem</span></span>
+      <h2 class="h2"><span class="l-es" data-split>El trabajo en equipo es la base de una comunidad.</span><span class="l-en" data-split>Teamwork is the foundation of a community.</span></h2>
+      <p class="lead" data-r style="--d:2"><span class="l-es">Desde el comienzo apostamos al vínculo público-privado, forjando alianzas con actores clave del sector IA en Argentina.</span><span class="l-en">From day one we have bet on public-private partnership, building alliances with key players in Argentina's AI sector.</span></p>
+    </div>
+    <div class="ally">
+      <article class="ally-card spot" data-r="left">
+        <div class="bgimg" style="background-image:url({{img:fondos/degradado-negro-violeta.png|1200}})"></div>
+        <div class="logo"><img src="{{png:logos/unidades/hubtech-ia-blanco.png|600}}" alt="HubTech IA"></div>
+        <h3><span class="l-es">En 2024 impulsamos HubTech IA</span><span class="l-en">In 2024 we launched HubTech IA</span></h3>
+        <p><span class="l-es">Un espacio de colaboración donde convergen gobierno, empresas privadas y el ámbito académico para posicionar a Argentina como un polo global de inteligencia artificial, conectando energía, agua e IA en Neuquén.</span><span class="l-en">A collaboration space where government, private companies and academia converge to position Argentina as a global AI hub, connecting energy, water and AI in Neuquén.</span></p>
+        <a class="btn btn-ghost" href="https://www.hubtechia.com.ar/" target="_blank" rel="noopener">{{ico:globe}}hubtechia.com.ar</a>
+      </article>
+      <article class="ally-card spot" data-r="right">
+        <div class="bgimg" style="background-image:url({{img:fondos/degradado-verde-azul.png|1200}})"></div>
+        <div class="logo"><img src="{{png:logos/aliados/blanco/start-coding-ia.png|400}}" alt="Fundación Start Coding IA"></div>
+        <h3><span class="l-es">La formación como pilar</span><span class="l-en">Talent as a pillar</span></h3>
+        <p><span class="l-es">Frente a la escasez de talento en tecnología e IA, creamos programas de formación propios, participamos en Argentina Programa 4.0 y trabajamos junto a la Fundación Start Coding IA. Muchos egresados se integraron a nuestros equipos.</span><span class="l-en">Facing a shortage of tech and AI talent, we created our own training programs, took part in Argentina Programa 4.0 and work with the Start Coding IA Foundation. Many graduates joined our teams.</span></p>
+      </article>
+    </div>
+    <div class="logo-rows" data-r>
+      <div class="marq-wrap"><div class="marq" style="--t:60s">{{logos:logos/aliados|a}}{{logos:logos/aliados|a|dup}}</div></div>
+      <div class="marq-wrap"><div class="marq rev" style="--t:60s">{{logos:logos/aliados|b}}{{logos:logos/aliados|b|dup}}</div></div>
+    </div>
+    <div class="clients" data-r="scale">
+      <div class="bgimg" style="background-image:url({{img:fondos/degradado-verde-azul.png|1600}})"></div>
+      <h3 class="h3"><span class="l-es">Algunos clientes</span><span class="l-en">Some of our clients</span></h3>
+      <div class="marq-wrap"><div class="marq" style="--t:36s">{{logos:logos/clientes}}{{logos:logos/clientes|all|dup}}</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMUNIDAD ================= -->
+<section id="comunidad" class="sec dark" data-label-es="Comunidad" data-label-en="Community">
+  <div class="bg"><img src="{{img:fondos/degradado-verde-azul.png|1920}}" alt="" style="opacity:.35"></div>
+  <div class="wrap">
+    <div class="comm">
+      <div class="phone" data-r="scale">
+        <video id="reel" data-src="{{video:videos/reel-manuel-turner-saia-conf.mp4}}" poster="{{img:videos/reel-manuel-turner-saia-conf-poster.jpg|720}}" muted loop playsinline preload="none"></video>
+        <button class="snd" type="button" aria-label="Sonido">{{ico:mute}}</button>
+      </div>
+      <div>
+        <span class="eyebrow" data-r><span class="l-es">Comunidad y eventos</span><span class="l-en">Community &amp; events</span></span>
+        <h2 class="h2"><span class="l-es" data-split>Llevamos la conversación sobre IA y privacidad a todos lados.</span><span class="l-en" data-split>We take the AI and privacy conversation everywhere.</span></h2>
+        <p class="lead" data-r style="--d:2"><span class="l-es">Conferencias, webinars y conversatorios junto a IALAB, el Poder Judicial y referentes de Iberoamérica. En el video, Manuel Turner (CEO) en SAIA Conf: ¿qué podemos resolver desde la Argentina?</span><span class="l-en">Conferences, webinars and panels with IALAB, the Judiciary and leaders across Ibero-America. In the video, Manuel Turner (CEO) at SAIA Conf: what can we solve from Argentina?</span></p>
+        <div class="posters" data-r style="--d:3">
+          <a class="poster" href="{{img:fotos/eventos/conferencia-privacidad-por-diseno-01.jpg|1080}}" data-lb><img src="{{img:fotos/eventos/conferencia-privacidad-por-diseno-01.jpg|700}}" alt="Conferencia Internacional: Privacidad por diseño y agentes de IA"></a>
+          <a class="poster" href="{{img:fotos/eventos/conversatorio-privacidad-2026.jpg|1080}}" data-lb><img src="{{img:fotos/eventos/conversatorio-privacidad-2026.jpg|700}}" alt="Conversatorio: Privacidad en la era de la Inteligencia Artificial"></a>
+          <a class="poster" href="{{img:fotos/eventos/conferencia-privacidad-por-diseno-02.jpg|1080}}" data-lb><img src="{{img:fotos/eventos/conferencia-privacidad-por-diseno-02.jpg|700}}" alt="Conferencia Internacional: oradores"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EQUIPO ================= -->
+<section id="equipo" class="sec light" data-label-es="Equipo" data-label-en="Team">
+  <img class="tex" data-par="-0.1" style="left:-10%;bottom:-20%;width:55%;opacity:.6" src="{{img:fondos/textura-puntos.png|1200}}" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-r>Management</span>
+      <h2 class="h2"><span class="l-es" data-split>Las personas detrás de cada pieza.</span><span class="l-en" data-split>The people behind every piece.</span></h2>
+    </div>
+    <div class="team">
+      <div class="tm" data-r style="--d:1"><div class="ph"><img src="{{img:fotos/equipo/luciano-borra.jpg|500}}" alt="Luciano Borra" loading="lazy"></div><b>Luciano Borra</b><span class="sr-only">Director</span></div>
+      <div class="tm" data-r style="--d:2"><div class="ph"><img src="{{img:fotos/equipo/manuel-turner.jpg|500}}" alt="Manuel Turner" loading="lazy"></div><b>Manuel Turner</b><span class="sr-only">CEO</span></div>
+      <div class="tm" data-r style="--d:3"><div class="ph"><img src="{{img:fotos/equipo/agustina-mossotti.jpg|500}}" alt="Agustina Mossotti" loading="lazy"></div><b>Agustina Mossotti</b><span class="sr-only">CFO</span></div>
+      <div class="tm" data-r style="--d:4"><div class="ph"><img src="{{img:fotos/equipo/matias-calderini.jpg|500}}" alt="Matías Calderini" loading="lazy"></div><b>Matías Calderini</b><span class="sr-only">CTO</span></div>
+      <div class="tm" data-r style="--d:5"><div class="ph"><img src="{{img:fotos/equipo/facundo-ruggeri.jpg|500}}" alt="Facundo Ruggeri" loading="lazy"></div><b>Facundo Ruggeri</b><span class="sr-only">AI Arq</span></div>
+      <div class="tm" data-r style="--d:6"><div class="ph"><img src="{{img:fotos/equipo/ailen-bressan.jpg|500}}" alt="Ailén Bressan" loading="lazy"></div><b>Ailén Bressan</b><span class="sr-only">CX</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BROCHURE ================= -->
+<section id="brochure" class="dark" data-label-es="Brochure" data-label-en="Brochure">
+  <div class="wrap">
+    <div class="bro" data-r="scale">
+      <div class="bgimg" style="background-image:url({{img:fondos/degradado-negro-violeta.png|1600}})"></div>
+      <div>
+        <span class="eyebrow"><span class="l-es">Brochure general 2026</span><span class="l-en">2026 company brochure</span></span>
+        <h2 class="h2"><span class="l-es">Todo Puzzle AI en un documento.</span><span class="l-en">All of Puzzle AI in one document.</span></h2>
+        <p class="lead"><span class="l-es">Quiénes somos, misión y visión, productos, menciones, equipo, partners y clientes.</span><span class="l-en">Who we are, mission and vision, products, awards, team, partners and clients. (Document in Spanish.)</span></p>
+        <div class="btns"><a class="btn btn-solid mag" href="{{pdf:brochures/puzzle-brochure-2026.pdf}}" target="_blank" rel="noopener">{{ico:download}}<span class="l-es">Descargar brochure</span><span class="l-en">Download brochure</span></a></div>
+        <div class="bro-list">
+          <a href="{{pdf:brochures/privacy-ai-studio-brochure-2026.pdf}}" target="_blank" rel="noopener"><span>Privacy AI Studio · Brochure 2026 <small>PDF</small></span>{{ico:download}}</a>
+        </div>
+      </div>
+      <a class="bro-cover" href="{{pdf:brochures/puzzle-brochure-2026.pdf}}" target="_blank" rel="noopener" aria-label="Brochure Puzzle AI 2026"><img src="{{img:fotos/brochure-portada.jpg|1200}}" alt="Portada del brochure Puzzle AI 2026"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section id="contacto" class="sec dark" data-label-es="Contacto" data-label-en="Contact">
+  <div class="bg"><img src="{{img:fondos/degradado-verde-azul.png|1920}}" alt=""></div>
+  <div class="wrap">
+    <div class="ct">
+      <div>
+        <span class="eyebrow" data-r><span class="l-es">Contacto</span><span class="l-en">Contact</span></span>
+        <h2 class="h1" style="margin-top:18px"><span class="l-es" data-split>Armemos la pieza que te falta.</span><span class="l-en" data-split>Let's build your missing piece.</span></h2>
+      </div>
+      <div class="ct-links" data-r style="--d:2">
+        <a href="https://wa.me/5493462385720" target="_blank" rel="noopener"><span class="ci">{{ico:whatsapp}}</span><span><small>WhatsApp</small>+54 9 3462 38-5720</span></a>
+        <a href="mailto:hello@thepuzzle.digital"><span class="ci">{{ico:mail}}</span><span><small>Email</small>hello@thepuzzle.digital</span></a>
+        <a href="https://www.instagram.com/thepuzzle.ai/" target="_blank" rel="noopener"><span class="ci">{{ico:instagram}}</span><span><small>Instagram</small>@thepuzzle.ai</span></a>
+        <a href="{{cfg:linkedin}}" target="_blank" rel="noopener"><span class="ci">{{ico:linkedin}}</span><span><small>LinkedIn</small>thepuzzle.ai</span></a>
+      </div>
+    </div>
+    <div class="big-word" aria-hidden="true">Puzzle AI</div>
+    <footer class="foot">
+      <img src="{{png:logos/marca/puzzle-ai-blanco.png|360}}" alt="Puzzle AI">
+      <nav aria-label="Mapa del sitio">
+        <a href="#ecosistema"><span class="l-es">Ecosistema</span><span class="l-en">Ecosystem</span></a><a href="#privacy">Privacy AI Studio</a><a href="#agents">AI Agents</a><a href="#energy">Energy AI</a><a href="#datahub">Data Hub</a><a href="{{pdf:brochures/puzzle-brochure-2026.pdf}}" target="_blank" rel="noopener">Brochure</a>
+      </nav>
+      <span>© <span id="yr">2026</span> Puzzle AI · <span class="l-es">Hecho en Argentina</span><span class="l-en">Made in Argentina</span></span>
+    </footer>
+  </div>
+</section>
+
+</main>
+
+<a id="wa" href="https://wa.me/5493462385720" target="_blank" rel="noopener" aria-label="WhatsApp">{{ico:whatsapp}}</a>
+<div id="lb" role="dialog" aria-modal="true" aria-label="Imagen"><img alt=""><button type="button" aria-label="Cerrar">✕</button></div>
+
+<script>{{js}}</script>
+</body>
+</html>

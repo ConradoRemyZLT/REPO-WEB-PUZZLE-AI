@@ -1,0 +1,63 @@
+WEB PUZZLE AI
+Repositorio completo · 30/10/2026
+
+Sitio institucional de Puzzle AI, armado sobre la estructura de la web ZLT v2
+pero con la marca, los recursos y la arquitectura de Puzzle: una casa madre
+(Puzzle AI) con tres unidades de negocio (Privacy AI Studio, Energy AI y
+Data Hub), un producto transversal (AI Agents) y dos iniciativas (HubTech IA
+y Formación de talento).
+
+Es bilingüe (ES / EN, selector arriba a la derecha), tiene pantalla de carga
+y login con las mismas credenciales que la web ZLT v2.
+
+LO QUE SE PUBLICA
+
+  html/PUZZLE-WEB-home.html   un solo archivo con todo adentro: imágenes,
+                              videos, tipografía Causten, estilos y código.
+  brochures/                  los PDF que ofrece la web. Viajan aparte y se
+                              suben junto al HTML, en una carpeta brochures/.
+
+CÓMO SE EDITA
+
+  El HTML final NO se toca a mano: se genera.
+
+  src/index.html    el contenido (textos en español y en inglés, en pares
+                    <span class="l-es"> / <span class="l-en">)
+  src/styles.css    el diseño
+  src/app.js        animaciones e interacción
+  src/gate.js       el login
+
+  Después de cambiar algo:   python build.py
+  Eso regenera html/PUZZLE-WEB-home.html y deja en _site/ una copia lista
+  para abrir o subir (index.html + brochures + íconos).
+  Para verla en la PC: abrir _site/index.html con doble clic.
+
+CÓMO ESTÁ ORDENADO
+
+  logos/
+    marca/        Puzzle AI en sus variantes de color, isotipo P
+    unidades/     Privacy AI Studio, AI Agents, Energy AI, Data Hub, HubTech IA
+    aliados/      partners (color) y aliados/blanco/ (para fondos oscuros)
+    clientes/     clientes, en blanco
+    premios/      laureles #LatamDigital y AEPD
+  fotos/
+    equipo/             management
+    eventos/            piezas de conferencias y conversatorios
+    privacy-ai-studio/  páginas del brochure 2026 (galería)
+  fondos/         degradados, texturas y tramas del brandbook
+  videos/         reel de Manuel Turner en SAIA Conf y fondo de Privacy
+  fuentes/        Causten en WOFF2
+  iconos/web/     favicon, íconos de iOS/Android, imagen para compartir
+  brochures/      PDF
+  links/          teléfonos, mails, redes y sitios externos (Excel)
+  _inventario.csv la lista completa: qué es cada archivo y cuánto pesa
+
+TRES COSAS PARA TENER EN CUENTA
+
+  · La página está en noindex: Google no la muestra. Es a propósito, para
+    que no compita con thepuzzle.ai hasta que se decida la mudanza.
+  · El login es del lado del navegador (igual que en ZLT): frena a quien
+    entra por la URL, no a quien lea el código; los PDF de brochures/ quedan
+    accesibles por link directo. Los usuarios son los mismos que en ZLT v2.
+  · Causten se embebe en el HTML. Hay que confirmar que la licencia de la
+    fuente cubra uso web; si no, se reemplaza en src/styles.css.

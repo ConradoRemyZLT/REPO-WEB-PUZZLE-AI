@@ -1,0 +1,56 @@
+# Publica la web de Puzzle AI en GitHub Pages cada vez que se sube algo a main.
+#
+# Publica html/PUZZLE-WEB-home.html (generado con `python build.py`, todo embebido) como /index.html,
+# más brochures/ (los PDF viajan aparte) y los íconos de iconos/web/, igual que el _site/ local.
+# Login: el build ya embebe gate.js (mismos usuarios que ZLT-WEB-V2); acá solo se verifica que esté.
+# Sigue en noindex para no competir con thepuzzle.ai hasta la mudanza.
+
+name: Publicar en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Armar el sitio
+        run: |
+          set -euo pipefail
+          test -s html/PUZZLE-WEB-home.html || { echo "Falta html/PUZZLE-WEB-home.html: correr python build.py y volver a subir"; exit 1; }
+          mkdir -p _site/brochures
+          cp html/PUZZLE-WEB-home.html _site/index.html
+          cp html/robots.txt _site/robots.txt
+          cp brochures/*.pdf _site/brochures/
+          cp iconos/web/* _site/
+          # Login: el gate tiene que estar embebido una sola vez
+          f=_site/index.html
+          [ "$(grep -o 'zlt-gate-v1-2026' "$f" | wc -l)" = 1 ] || { echo "El login no quedó una sola vez en $f: correr python build.py"; exit 1; }
+          touch _site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
