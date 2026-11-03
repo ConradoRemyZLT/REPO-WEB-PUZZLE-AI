@@ -61,3 +61,26 @@ TRES COSAS PARA TENER EN CUENTA
     accesibles por link directo. Los usuarios son los mismos que en ZLT v2.
   · Causten se embebe en el HTML. Hay que confirmar que la licencia de la
     fuente cubra uso web; si no, se reemplaza en src/styles.css.
+
+AVISO A N8N AL PUBLICAR (Deploy desde Teams)
+
+  Cada corrida de .github/workflows/pages.yml termina con un job "avisar" que
+  le manda a n8n, firmado (HMAC-SHA256), cómo le fue a cada job (build y deploy).
+  Avisa tanto si sale bien como si falla. El flujo: se abre el PR, y al mergear
+  a main el workflow publica y avisa.
+
+  QUÉ SIGNIFICA "PASARON LOS TESTS" EN ESTA ETAPA
+    Son los chequeos que ya tiene el job "build": que exista
+    html/PUZZLE-WEB-home.html y que el login (zlt-gate-v1-2026) quede embebido
+    una sola vez. No hay tests propios y no se agregaron. Si build y deploy
+    dicen "success", el aviso dice que la Action terminó bien.
+
+  QUÉ NO SIGNIFICA
+    No verifica que el sitio ya sirva la versión nueva ni publica a Wix: eso
+    queda para una etapa posterior. "La Action terminó bien" no es "el sitio
+    está actualizado".
+
+  SECRETO (lo carga quien tenga admin del repo)
+    Settings > Secrets and variables > Actions > New repository secret
+    Nombre: N8N_DEPLOY_HMAC_SECRET   (el valor lo pasa Claudio)
+    Si no está cargado, el job avisa con un warning y no rompe la corrida.
