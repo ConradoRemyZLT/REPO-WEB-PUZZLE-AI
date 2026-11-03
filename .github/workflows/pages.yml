@@ -51,6 +51,61 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Avisa a n8n (Teams) cómo terminó la corrida, salga bien o mal. Contrato: ver "AVISO A N8N" en LEEME.txt.
+  # Dice que la Action terminó (build + publicación), NO que el sitio ya sirve la versión nueva (eso se verifica en otra etapa).
+  # Necesita el secreto N8N_DEPLOY_HMAC_SECRET; si no está, avisa con un warning y no hace fallar la corrida.
+  avisar:
+    needs: [build, deploy]
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    env:
+      N8N_URL: https://n8n-dev.zltdesarrollos.com/webhook/deploy-web-aviso
+      SECRET: ${{ secrets.N8N_DEPLOY_HMAC_SECRET }}
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      SHA: ${{ github.sha }}
+      RUN_ID: ${{ github.run_id }}
+      RUN_ATTEMPT: ${{ github.run_attempt }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      EVENT: ${{ github.event_name }}
+      BUILD: ${{ needs.build.result }}
+      DEPLOY: ${{ needs.deploy.result }}
+      PAGE_URL: ${{ needs.deploy.outputs.page_url }}
+    steps:
+      - name: Avisar a n8n
+        run: |
+          if [ -z "$SECRET" ]; then echo "::warning::Falta el secreto N8N_DEPLOY_HMAC_SECRET: no se avisó a n8n"; exit 0; fi
+          # PR que originó el commit (el merge). Vacío si no se encuentra; no es motivo para no avisar.
+          export PR_NUMBER=$(gh api "repos/$REPO/commits/$SHA/pulls" --jq '.[0].number // empty' 2>/dev/null || true)
+          python3 - <<'PY'
+          import hashlib, hmac, json, os, time, urllib.request
+          e = os.environ
+          body = json.dumps({
+              "repo": e["REPO"], "sha": e["SHA"],
+              "pr": int(e["PR_NUMBER"]) if e.get("PR_NUMBER") else None,
+              "run_id": int(e["RUN_ID"]), "run_attempt": int(e["RUN_ATTEMPT"]), "event": e["EVENT"],
+              "jobs": {"build": e["BUILD"], "deploy": e["DEPLOY"]},
+              "run_url": e["RUN_URL"], "pages_url": e.get("PAGE_URL") or None,
+          }, separators=(",", ":")).encode()
+          ts = str(int(time.time()))
+          sig = hmac.new(e["SECRET"].encode(), ts.encode() + b"." + body, hashlib.sha256).hexdigest()
+          req = urllib.request.Request(e["N8N_URL"], data=body, headers={
+              "Content-Type": "application/json", "X-Timestamp": ts, "X-Signature-256": "sha256=" + sig,
+              "User-Agent": "gh-actions-deploy-aviso"})
+          for i in range(3):
+              try:
+                  print("n8n respondió", urllib.request.urlopen(req, timeout=20).status); break
+              except Exception as x:
+                  print("intento", i + 1, "falló:", type(x).__name__, x)
+                  if i == 2: raise SystemExit(1)
+                  time.sleep(5)
+          PY
